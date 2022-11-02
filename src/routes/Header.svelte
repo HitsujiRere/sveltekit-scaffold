@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	let theme!: 'light' | 'dark';
+	let theme: 'light' | 'dark' | null = null;
 
 	$: {
-		if (typeof localStorage !== 'undefined') {
+		if (typeof localStorage !== 'undefined' && theme) {
 			localStorage.theme = theme;
 		}
 
 		if (typeof document !== 'undefined') {
 			if (theme === 'dark') {
 				document.documentElement.classList.add('dark');
-			} else {
+			} else if (theme === 'light') {
 				document.documentElement.classList.remove('dark');
 			}
 		}
